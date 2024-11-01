@@ -8,22 +8,20 @@ function download() {
     if (successMessage) successMessage.remove()
     
     const fetches=[]
-    
-    const promise1 = new Promise((resolve, reject) => {
-        console.log("Preparing data...")
-        for (var i = 1; i <= 5; i++) {
-            fetchvar=fetch("https://randomuser.me/api")
-                .then(response => {
-                    return response.json()
-                })
-                .then(data => {
-                    createresume(data)
-                })
-            fetches.push(fetchvar)
-        }
-        function createresume(resumedata) {
-            resumedata.results.forEach(resum => {
-                const resume = `
+    console.log("Preparing data...")
+    for (var i = 1; i <= 5; i++) {
+        fetchvar=fetch("https://randomuser.me/api")
+            .then(response => {
+                return response.json()
+            })
+            .then(data => {
+                createresume(data)
+            })
+        fetches.push(fetchvar)
+    }
+    function createresume(resumedata) {
+        resumedata.results.forEach(resum => {
+            const resume = `
             <div class="resume">
                 <img src="${resum.picture.large}" alt="image" class="image">
                 <p><span>Name:</span> ${resum.name.title + space + resum.name.first + space + resum.name.last}</p>
@@ -32,11 +30,9 @@ function download() {
                 <p><span>Phone:</span> ${resum.phone}</p>
             </div>
             `
-                innerContainer.insertAdjacentHTML('beforeend', resume);
-            })
-        }
-        resolve()
-    })
+            innerContainer.insertAdjacentHTML('beforeend', resume);
+        })
+    }
     Promise.all(fetches).then(()=>{
         const success = `<div class="success">Success</div>`
         headerContainer.insertAdjacentHTML('beforeend', success)
