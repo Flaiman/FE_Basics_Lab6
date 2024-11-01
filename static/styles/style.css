@@ -23,6 +23,12 @@
     border-radius: 10px;
     font-size: 2rem;
     cursor: pointer;
+    border: none;
+    transition-duration: 0.3s;
+}
+.download_button:hover{
+    background-color: white;
+    color: gold;
 }
 .success{
     font-size: 3rem;
